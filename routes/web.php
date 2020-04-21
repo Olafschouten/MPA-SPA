@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
 Route::get('/categories',  'CategoriesController@show');
 
 Route::get('/categories/{id}',  'CategoriesController@showItems');
@@ -26,6 +30,22 @@ Route::get('/products',  'ProductsController@show');
 Route::get('/products/{id}',  'ProductsController@showProducts');
 
 
-Auth::routes();
+Route::get('/register', [
+    'uses' => 'UserController@getRegister',
+    'as' => 'user.register'
+]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/register', [
+    'uses' => 'UserController@postRegister',
+    'as' => 'user.register'
+]);
+
+//Route::get('/login', [
+//    'user' => 'UserController@signIn',
+//    'as' => 'user.login'
+//]);
+//
+//Route::post('/register', [
+//    'user' => 'UserController@postRegister',
+//    'as' => 'user.register'
+//]);

@@ -12,7 +12,7 @@
                 @foreach ($products as $product)
                     <h3>{{ $product->title }}</h3>
                     <div class="col-md-auto">{{ $product->description }}</div>
-                    <p>Price: {{ $product->price }}</p>
+                    <p>${{ $product->price }}</p>
                 @endforeach
             </div>
         </div>
