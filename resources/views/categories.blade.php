@@ -4,9 +4,9 @@
 
 @section('content')
     <div class="content">
-        <div class="title m-b-md">
-            Laravel
-        </div>
+        @foreach ($tests as $test)
+            <p>{{ $test->name }}</p>
+        @endforeach
     </div>
 @stop
 
