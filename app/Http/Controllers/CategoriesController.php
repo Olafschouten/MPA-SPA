@@ -8,10 +8,21 @@ class CategoriesController extends Controller
 {
     public function show()
     {
-        $tests = \DB::table('categories')->get();
+        $categories = \DB::table('categories')->get();
 
         return view('categories', [
-            'tests' => $tests
+            'categories' => $categories
+        ]);
+    }
+
+    public function showItems($id)
+    {
+        $category = \DB::table('categories')->where('id', $id)->get();
+        $products = \DB::table('products')->where('category_id', $id)->get();
+
+        return view('showItem', [
+            'category' => $category,
+            'products' => $products,
         ]);
     }
 }

@@ -19,11 +19,12 @@ Route::get('/', function () {
 
 Route::get('/categories',  'CategoriesController@show');
 
+Route::get('/categories/{id}',  'CategoriesController@showItems');
+
 Route::get('/products',  'ProductsController@show');
 
-Auth::routes();
+Route::get('/products/{id}',  'ProductsController@showProducts');
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
