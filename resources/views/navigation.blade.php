@@ -23,7 +23,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Login</a></li>
+                        <li><a href="{{ route('user.login') }}">Login</a></li>
                         <li><a href="{{ route('user.register') }}">Register</a></li>
                     </ul>
                 </li>

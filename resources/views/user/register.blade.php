@@ -1,10 +1,9 @@
 @extends('layout')
 
-{{--@extends('navigation')--}}
+@extends('navigation')
 
 @section('content')
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="row">
         <h1>Register</h1>
         <form action="{{ route('user.register') }}" method="post">
             @if (count($errors) > 0)
@@ -29,7 +28,6 @@
             {{ csrf_field() }}
         </form>
     </div>
-</div>
 @endsection
 
 @extends('footer')

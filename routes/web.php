@@ -13,13 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+Route::get('/',  'WelcomeController@getIndex');
 
 Route::get('/categories',  'CategoriesController@show');
 
@@ -40,12 +38,17 @@ Route::post('/register', [
     'as' => 'user.register'
 ]);
 
-//Route::get('/login', [
-//    'user' => 'UserController@signIn',
-//    'as' => 'user.login'
-//]);
-//
-//Route::post('/register', [
-//    'user' => 'UserController@postRegister',
-//    'as' => 'user.register'
-//]);
+Route::get('/login', [
+    'uses' => 'UserController@getLogin',
+    'as' => 'user.login'
+]);
+
+Route::post('/login', [
+    'uses' => 'UserController@postLogin',
+    'as' => 'user.login'
+]);
+
+Route::get('/user/profile', [
+    'uses' => 'UserController@getProfile',
+    'as' => 'user.profile'
+]);
