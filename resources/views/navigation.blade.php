@@ -16,17 +16,22 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Shopping Cart</a></li>
+                <li><a href="{{ route('product.shoppingCart') }}">Shopping Cart
+                    <span class="badge">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</span></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">Account
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ route('user.login') }}">Login</a></li>
-                        <li><a href="{{ route('user.register') }}">Register</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="{{ route('user.logout') }}">Logout</a></li>
+                        @if(Auth::check())
+                            <li><a href="{{ route('user.profile') }}">Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ route('user.logout') }}">Logout</a></li>
+                        @else
+                            <li><a href="{{ route('user.login') }}">Login</a></li>
+                            <li><a href="{{ route('user.register') }}">Register</a></li>
+                        @endif
                     </ul>
                 </li>
             </ul>

@@ -13,6 +13,7 @@
                     <h3>{{ $product->title }}</h3>
                     <div class="col-md-auto">{{ $product->description }}</div>
                     <p>${{ $product->price }}</p>
+                    <a href="/categories/{{ $product->id }}">{{ $product->name }}</a>
                 @endforeach
             </div>
         </div>

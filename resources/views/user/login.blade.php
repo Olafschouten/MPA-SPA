@@ -15,18 +15,19 @@
             @endif
             <div class="form-group">
                 <label for="email">E-Mail</label>
-                <input type="text" id="email" name="email">
+                <input type="text" id="email" name="email" class="form-control">
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password"class="form-control">
             </div>
 
-            <button type="submit" class="btn">Login</button>
+            <button type="submit" class="btn btn-primary">Login</button>
 
             {{ csrf_field() }}
         </form>
+        <p>Don't have an account? <a href="{{ route('user.register') }}">Sign up here</a></p>
     </div>
 @endsection
 
