@@ -7,7 +7,7 @@ use App\Order;
 use App\Products;
 use Egulias\EmailValidator\Warning\ObsoleteDTEXT;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
