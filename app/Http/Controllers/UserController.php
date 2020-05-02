@@ -92,9 +92,9 @@ class UserController extends Controller
         return redirect()->route('user.login');
     }
 
-//    protected function authenticated(Request $request, $user)
-//    {
-//        $user->last_seen_at = Carbon::now()->format('Y-m-d H:i:s');
-//        $user->save();
-//    }
+    protected function authenticated(Request $request, $user)
+    {
+        $user->last_seen_at = Carbon::now()->format('Y-m-d H:i:s');
+        $user->save();
+    }
 }
