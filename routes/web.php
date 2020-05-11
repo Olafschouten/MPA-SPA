@@ -31,6 +31,11 @@ Route::get('/add-to-cart/{id}', [
     'as' => 'product.addToCart'
 ]);
 
+Route::get('/increase-by-one/{id}', [
+    'uses' => 'ProductsController@getIncreaseByOne',
+    'as' => 'product.increaseByOne'
+]);
+
 Route::get('/reduce/{id}', [
     'uses' => 'ProductsController@getReduceByOne',
     'as' => 'product.reduceByOne'

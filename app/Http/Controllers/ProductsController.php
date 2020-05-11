@@ -80,6 +80,18 @@ class ProductsController extends Controller
         return redirect()->route('product.shoppingCart');
     }
 
+    public function getIncreaseByOne(Request $request, $id)
+    {
+        $product = Products::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+
+        return redirect()->back();
+    }
+
     public function getCart()
     {
         if (!Session::has('cart')) {
