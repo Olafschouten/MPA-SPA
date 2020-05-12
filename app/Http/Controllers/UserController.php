@@ -88,6 +88,11 @@ class UserController extends Controller
     // Logs the user out
     public function getLogout()
     {
+        $user = Auth::guard()->user();
+
+        $user->last_seen_at = null;
+        $user->save();
+
         Auth::logout();
         return redirect()->route('user.login');
     }

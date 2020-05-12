@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class SessionTimeout
 {
@@ -25,6 +26,11 @@ class SessionTimeout
 
         // If user has been inactivity longer than the allowed inactivity period
         if ($absence > config('session.lifetime')) {
+            $user->last_seen_at = null;
+            $user->save();
+
+            Session::remove('oldUrl');
+
             Auth::guard()->logout();
 
             $request->session()->invalidate();
