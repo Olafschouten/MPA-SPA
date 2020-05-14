@@ -23,19 +23,26 @@ class ProductsController extends Controller
 
     public function showProducts($id)
     {
-//        $products = \DB::table('products')->where('id', $id)->get();
-
-        $products = \DB::table('products')
-            ->join('categories', 'category_id', '=', 'categories.id')
-            ->where('products.id', $id)
-            ->select('products.title', 'products.description', 'products.price', 'categories.id', 'categories.name')
+        $products = \DB::table('products AS p')
+            ->where('p.id', $id)
+            ->select('p.id', 'p.title', 'p.description', 'p.price')
             ->get();
 
-//        dd($products);
+        $categories = \DB::table('categories AS c')
+            ->join('category_product', 'category_id', '=', 'c.id')
+            ->select('c.id', 'c.title')
+            ->get();
 
         return view('showProduct', [
-            'products' => $products
+            'products' => $products,
+            'categories' => $categories,
         ]);
+
+//        $products = \DB::table('products AS p', 'categories AS c')
+////            ->join('categories', 'categories.id', '=', 'category_product.category_id')
+//            ->where('p.id', $id)
+//            ->select('p.title', 'p.description', 'p.price', 'c.id', 'c.title')
+//            ->get();
     }
 
     public function getAddToCart(Request $request, $id)

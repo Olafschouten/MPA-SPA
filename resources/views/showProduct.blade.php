@@ -13,7 +13,9 @@
                     <h3>{{ $product->title }}</h3>
                     <div class="col-md-auto">{{ $product->description }}</div>
                     <p>${{ $product->price }}</p>
-                    <a href="/categories/{{ $product->id }}">{{ $product->name }}</a>
+                    @foreach($categories as $category)
+                        <a href="/categories/{{ $category->id }}">{{ $category->title }}</a>
+                    @endforeach
                 @endforeach
             </div>
         </div>
