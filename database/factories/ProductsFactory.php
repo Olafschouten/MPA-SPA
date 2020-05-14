@@ -10,6 +10,7 @@ $factory->define(Products::class, function (Faker $faker) {
         'title' => $faker->firstName,
         'description' => $faker->text($maxNbChars = 200),
         'price' => $faker->numerify('##'),
-        'category_id' => factory(\App\Categories::class),
+        'created_at' => now(),
+        'updated_at' => now(),
     ];
 });
