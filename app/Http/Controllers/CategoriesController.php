@@ -22,13 +22,10 @@ class CategoriesController extends Controller
             ->where('id', $id)
             ->get();
 
-//        $products = \DB::table('products')
-//            ->where('category_id', $id)
-//            ->get();
-
         $products = \DB::table('products AS p')
-            ->where('p.id', $id)
+            ->join('category_product', 'category_id', '=', 'p.id')
             ->select('p.id', 'p.title', 'p.description', 'p.price')
+            ->where('category_product.product_id', $id)
             ->get();
 
         return view('showItem', [
