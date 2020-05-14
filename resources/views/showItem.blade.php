@@ -11,7 +11,7 @@
             <div class="row justify-content-md-center">
                 <div class="col col-lg-auto">
                     @foreach ($category as $item)
-                        <h2>{{ $item->name }}</h2>
+                        <h2>{{ $item->title }}</h2>
                     @endforeach
                 </div>
                 @foreach ($products as $product)

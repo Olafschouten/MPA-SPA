@@ -31,18 +31,13 @@ class ProductsController extends Controller
         $categories = \DB::table('categories AS c')
             ->join('category_product', 'category_id', '=', 'c.id')
             ->select('c.id', 'c.title')
+            ->where('category_product.product_id', $id)
             ->get();
 
         return view('showProduct', [
             'products' => $products,
             'categories' => $categories,
         ]);
-
-//        $products = \DB::table('products AS p', 'categories AS c')
-////            ->join('categories', 'categories.id', '=', 'category_product.category_id')
-//            ->where('p.id', $id)
-//            ->select('p.title', 'p.description', 'p.price', 'c.id', 'c.title')
-//            ->get();
     }
 
     public function getAddToCart(Request $request, $id)
