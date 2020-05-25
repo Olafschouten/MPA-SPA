@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
+    // Gets all categories
     public function show()
     {
         $categories = \DB::table('categories')
@@ -16,6 +17,7 @@ class CategoriesController extends Controller
         ]);
     }
 
+    // Gets all categories with products
     public function showItems($id)
     {
         $category = \DB::table('categories')

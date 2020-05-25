@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
+    // Gets all products
     public function show()
     {
         $products = \DB::table('products')->get();
@@ -21,6 +22,7 @@ class ProductsController extends Controller
         ]);
     }
 
+    // Gets all products with categories
     public function showProducts($id)
     {
         $products = \DB::table('products AS p')
@@ -40,6 +42,7 @@ class ProductsController extends Controller
         ]);
     }
 
+    // Add the product to the cart
     public function getAddToCart(Request $request, $id)
     {
         $product = Products::find($id);
@@ -52,6 +55,7 @@ class ProductsController extends Controller
         return redirect()->back();
     }
 
+    // Remove one item
     public function getReduceByOne($id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -67,6 +71,7 @@ class ProductsController extends Controller
         return redirect()->route('product.shoppingCart');
     }
 
+    // Remove all items
     public function getRemoveItem($id)
     {
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -82,6 +87,7 @@ class ProductsController extends Controller
         return redirect()->route('product.shoppingCart');
     }
 
+    // Increase by one item
     public function getIncreaseByOne(Request $request, $id)
     {
         $product = Products::find($id);
@@ -94,6 +100,7 @@ class ProductsController extends Controller
         return redirect()->back();
     }
 
+    // Gets data from current cart
     public function getCart()
     {
         if (!Session::has('cart')) {
@@ -104,6 +111,7 @@ class ProductsController extends Controller
         return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
+    // If cart isn't null then give that data to the site and show it
     public function getCheckout()
     {
         if (!Session::has('cart')) {
@@ -115,6 +123,7 @@ class ProductsController extends Controller
         return view('shop.checkout', ['total' => $total]);
     }
 
+    // If form is filled in then show success
     public function postCheckout(Request $request)
     {
         if (!Session::has('cart')) {

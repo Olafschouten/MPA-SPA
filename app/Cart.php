@@ -4,6 +4,7 @@ namespace App;
 
 class Cart
 {
+    // Properties
     public $items = null;
     public $totalQty = 0;
     public $totalPrice = 0;
@@ -20,6 +21,7 @@ class Cart
         }
     }
 
+    // Add one item by id to the cart
     public function add ($item, $id)
     {
         $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
@@ -35,6 +37,7 @@ class Cart
         $this->totalPrice += $item->price;
     }
 
+    // Remove one item from the cart by id
     public function reduceOne ($id)
     {
         $this->items[$id]['qty']--;
@@ -46,6 +49,7 @@ class Cart
         }
     }
 
+    // Remove all items from the cart by id
     public function removeItem($id)
     {
         $this->totalQty -= $this->items[$id]['qty'];
