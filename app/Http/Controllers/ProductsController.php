@@ -27,7 +27,7 @@ class ProductsController extends Controller
     {
         $products = \DB::table('products AS p')
             ->where('p.id', $id)
-            ->select('p.id', 'p.title', 'p.description', 'p.price')
+            ->select('p.id', 'p.title', 'p.description', 'p.price', 'p.quantity')
             ->get();
 
         $categories = \DB::table('categories AS c')

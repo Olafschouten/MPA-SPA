@@ -10,6 +10,7 @@ $factory->define(Products::class, function (Faker $faker) {
         'title' => $faker->firstName,
         'description' => $faker->text($maxNbChars = 200),
         'price' => $faker->numerify('##'),
+        'quantity' => 10,
         'created_at' => now(),
         'updated_at' => now(),
     ];
