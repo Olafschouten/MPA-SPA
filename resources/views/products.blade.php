@@ -16,6 +16,10 @@
                 position: absolute;
                 bottom: 0;
             }
+
+            .b-m-15 {
+                margin-bottom: 15px;
+            }
         </style>
 
         <div class="row" style="float: none; margin: 0 auto;">
@@ -23,13 +27,14 @@
                 <div class="col-md-3 img-thumbnail test">
                     <h3>{{ $product->title }}</h3>
                     <p>{{ $product->description }}</p>
-                    <p>${{ $product->price }}</p>
-                    <p class="clearfix bottom-align-text">
+
+                    <div class="clearfix bottom-align-text b-m-15">
+                        <p>${{ $product->price }}</p>
                         <a href="{{ route('product.addToCart', ['id' => $product->id]) }}"
                            class="btn btn-primary pull-left" role="button">Add to cart</a>
                         <a href="/products/{{ $product->id }}" class="btn btn-secondary pull-right" role="button">Link
                             to product</a>
-                    </p>
+                    </div>
                 </div>
             @endforeach
         </div>
