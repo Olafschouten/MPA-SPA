@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Order;
-use App\Products;
+use App\Product;
 use Egulias\EmailValidator\Warning\ObsoleteDTEXT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
     // Gets all products
     public function show()
@@ -22,7 +22,7 @@ class ProductsController extends Controller
         ]);
     }
 
-    // Gets all products with categories
+    // Gets product with categories
     public function showProducts($id)
     {
         $products = \DB::table('products AS p')
@@ -45,7 +45,7 @@ class ProductsController extends Controller
     // Add the product to the cart
     public function getAddToCart(Request $request, $id)
     {
-        $product = Products::find($id);
+        $product = Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);
@@ -90,7 +90,7 @@ class ProductsController extends Controller
     // Increase by one item
     public function getIncreaseByOne(Request $request, $id)
     {
-        $product = Products::find($id);
+        $product = Product::find($id);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($product, $product->id);

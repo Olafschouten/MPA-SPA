@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class CategoryController extends Controller
 {
     // Gets all categories
     public function show()
@@ -17,7 +17,7 @@ class CategoriesController extends Controller
         ]);
     }
 
-    // Gets all categories with products
+    // Gets category with products
     public function showItems($id)
     {
         $category = \DB::table('categories')

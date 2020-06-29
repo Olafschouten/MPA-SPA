@@ -18,47 +18,47 @@ Route::get('/', [
     'as' => 'home.welcome'
 ]);
 
-Route::get('/categories', 'CategoriesController@show');
+Route::get('/categories', 'CategoryController@show');
 
-Route::get('/categories/{id}', 'CategoriesController@showItems');
+Route::get('/categories/{id}', 'CategoryController@showItems');
 
-Route::get('/products', 'ProductsController@show');
+Route::get('/products', 'ProductController@show');
 
-Route::get('/products/{id}', 'ProductsController@showProducts');
+Route::get('/products/{id}', 'ProductController@showProducts');
 
 Route::get('/add-to-cart/{id}', [
-    'uses' => 'ProductsController@getAddToCart',
+    'uses' => 'ProductController@getAddToCart',
     'as' => 'product.addToCart'
 ]);
 
 Route::get('/increase-by-one/{id}', [
-    'uses' => 'ProductsController@getIncreaseByOne',
+    'uses' => 'ProductController@getIncreaseByOne',
     'as' => 'product.increaseByOne'
 ]);
 
 Route::get('/reduce/{id}', [
-    'uses' => 'ProductsController@getReduceByOne',
+    'uses' => 'ProductController@getReduceByOne',
     'as' => 'product.reduceByOne'
 ]);
 
 Route::get('/remove/{id}', [
-    'uses' => 'ProductsController@getRemoveItem',
+    'uses' => 'ProductController@getRemoveItem',
     'as' => 'product.remove'
 ]);
 
 Route::get('/shopping-cart', [
-    'uses' => 'ProductsController@getCart',
+    'uses' => 'ProductController@getCart',
     'as' => 'product.shoppingCart'
 ]);
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/checkout', [
-        'uses' => 'ProductsController@getCheckout',
+        'uses' => 'ProductController@getCheckout',
         'as' => 'checkout'
     ]);
 
     Route::post('/checkout', [
-        'uses' => 'ProductsController@postCheckout',
+        'uses' => 'ProductController@postCheckout',
         'as' => 'checkout'
     ]);
 });

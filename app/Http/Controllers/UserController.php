@@ -96,6 +96,4 @@ class UserController extends Controller
         Auth::logout();
         return redirect()->route('user.login');
     }
-
-
 }

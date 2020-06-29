@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Categories;
-use App\Products;
+use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
