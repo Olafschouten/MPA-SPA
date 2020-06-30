@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    // Gets all products
+    // Get all products
     public function show()
     {
         $products = \DB::table('products')->get();
@@ -22,7 +22,7 @@ class ProductController extends Controller
         ]);
     }
 
-    // Gets product with categories
+    // Get product with categories
     public function showProducts($id)
     {
         $products = \DB::table('products AS p')
@@ -42,12 +42,11 @@ class ProductController extends Controller
         ]);
     }
 
-    // Add the product to the cart
+    // Add item to the cart in the session or if not exist, make it
     public function getAddToCart(Request $request, $id)
     {
         $product = Product::find($id);
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
+        $cart = new Cart();
         $cart->add($product, $product->id);
 
         $request->session()->put('cart', $cart);
@@ -55,11 +54,10 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    // Remove one item
+    // Remove one item from the cart in the session
     public function getReduceByOne($id)
     {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
+        $cart = new Cart();
         $cart->reduceOne($id);
 
         if (count($cart->items) > 0) {
@@ -71,11 +69,10 @@ class ProductController extends Controller
         return redirect()->route('product.shoppingCart');
     }
 
-    // Remove all items
+    // Remove all items from the cart in the session
     public function getRemoveItem($id)
     {
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
+        $cart = new Cart();
         $cart->removeItem($id);
 
         if (count($cart->items) > 0) {
@@ -87,50 +84,53 @@ class ProductController extends Controller
         return redirect()->route('product.shoppingCart');
     }
 
-    // Increase by one item
+    // Increase item by one from the cart in the session
     public function getIncreaseByOne(Request $request, $id)
     {
+        // Finds item
         $product = Product::find($id);
-        $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        $cart = new Cart($oldCart);
+        // Make new Cart class from existing cart ----------
+        $cart = new Cart();
+        // Add item with item id to the existing cart
         $cart->add($product, $product->id);
 
+        // If no cart exists make and or update existing cart in session
         $request->session()->put('cart', $cart);
 
+        // Returns to page
         return redirect()->back();
     }
 
-    // Gets data from current cart
+    // Get data from the current cart in the session
     public function getCart()
     {
+        // If cart exists, return it to te view
         if (!Session::has('cart')) {
             return view('shop.shopping-cart', ['products' => null]);
         }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
+        // Make class form existing cart
+        $cart = new Cart();
         return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
-    // If cart isn't null then give that data to the site and show it
+    // Return to view with data form the cart in the session, otherwise return to the shopping cart.
     public function getCheckout()
     {
         if (!Session::has('cart')) {
             return view('shop.shopping-cart');
         }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
+        $cart = new Cart();
         $total = $cart->totalPrice;
         return view('shop.checkout', ['total' => $total]);
     }
 
-    // If form is filled in then show success
+    // Return to view if al required input fields are filled, otherwise return to view (and try again)
     public function postCheckout(Request $request)
     {
         if (!Session::has('cart')) {
             return redirect()->route('shop.shoppingCart');
         }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
+        $cart = new Cart();
 
         $order = new Order();
         $order->cart = serialize($cart);
