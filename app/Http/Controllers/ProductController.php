@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Category;
 use App\Order;
 use App\Product;
 use Egulias\EmailValidator\Warning\ObsoleteDTEXT;
@@ -15,30 +16,17 @@ class ProductController extends Controller
     // Get all products
     public function show()
     {
-        $products = \DB::table('products')->get();
-
         return view('products', [
-            'products' => $products
+            'products' => Product::getProducts()
         ]);
     }
 
     // Get product with categories
     public function showProducts($id)
     {
-        $products = \DB::table('products AS p')
-            ->where('p.id', $id)
-            ->select('p.id', 'p.title', 'p.description', 'p.price', 'p.quantity')
-            ->get();
-
-        $categories = \DB::table('categories AS c')
-            ->join('category_product', 'category_id', '=', 'c.id')
-            ->select('c.id', 'c.title')
-            ->where('category_product.product_id', $id)
-            ->get();
-
         return view('showProduct', [
-            'products' => $products,
-            'categories' => $categories,
+            'products' => Product::getProduct($id),
+            'categories' => Category::getSpecificCategories($id),
         ]);
     }
 
