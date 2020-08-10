@@ -11,7 +11,7 @@
             <div class="row justify-content-md-center">
                 <div class="col col-lg-2">
                     @foreach ($categories as $category)
-                        <a href="/categories/{{ $category->id }}">{{ $category->title }}</a>
+                        <a href="{{ route('category.show', ['id' => $category->id]) }}">{{ $category->title }}</a>
                         <br>
                     @endforeach
                 </div>

@@ -73,6 +73,20 @@
         .m-b-md {
             margin-bottom: 30px;
         }
+
+        .test {
+            height: 260px;
+            margin: 10px;
+        }
+
+        .bottom-align-text {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .b-m-15 {
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>

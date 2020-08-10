@@ -44,6 +44,15 @@
                     <strong>Total: {{ $totalPrice }}</strong>
                 </div>
             </div>
+            @if (Session::has('Stock_empty'))
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div id="charge-message" class="alert alert-danger">
+                            {{ Session::get('Stock_empty') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
             <hr>
             <div class="row justify-content-md-center">
                 <div class="col-md-6">

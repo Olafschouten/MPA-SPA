@@ -22,6 +22,7 @@ class ProductController extends Controller
     }
 
     // Get product with categories
+    // Returns to Product page
     public function showProducts($id)
     {
         return view('showProduct', [
@@ -75,18 +76,27 @@ class ProductController extends Controller
     // Increase item by one from the cart in the session
     public function getIncreaseByOne(Request $request, $id)
     {
-        // Finds item
-        $product = Product::find($id);
-        // Make new Cart class from existing cart ----------
+        $item = Product::checkQuantity($id);
+
+        // Make new Cart class from existing cart
         $cart = new Cart();
-        // Add item with item id to the existing cart
-        $cart->add($product, $product->id);
 
-        // If no cart exists make and or update existing cart in session
-        $request->session()->put('cart', $cart);
+        // Checks if there are enough items left of that product
+        if ($item[0]->quantity - 1 >= array_values($cart->items)[0]['qty']) {
+            // Finds item
+            $product = Product::find($id);
+            // Add item with item id to the existing cart
+            $cart->add($product, $product->id);
 
-        // Returns to page
-        return redirect()->back();
+            // If no cart exists make and or update existing cart in session
+            $request->session()->put('cart', $cart);
+
+            // Returns to page
+            return redirect()->back();
+        } else {
+            // Returns to page with a message
+            return redirect()->back()->with('Stock_empty', 'No more items in stock');
+        }
     }
 
     // Get data from the current cart in the session

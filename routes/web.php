@@ -18,13 +18,25 @@ Route::get('/', [
     'as' => 'home.welcome'
 ]);
 
-Route::get('/categories', 'CategoryController@show');
+Route::get('/categories', [
+    'uses' => 'CategoryController@show',
+    'as' => 'categories.show'
+]);
 
-Route::get('/categories/{id}', 'CategoryController@showItems');
+Route::get('/categories/{id}', [
+    'uses' => 'CategoryController@showItems',
+    'as' => 'category.show'
+]);
 
-Route::get('/products', 'ProductController@show');
+Route::get('/products', [
+    'uses' => 'ProductController@show',
+    'as' => 'products.show'
+]);
 
-Route::get('/products/{id}', 'ProductController@showProducts');
+Route::get('/products{id}', [
+    'uses' => 'ProductController@showProducts',
+    'as' => 'product.show'
+]);
 
 Route::get('/add-to-cart/{id}', [
     'uses' => 'ProductController@getAddToCart',

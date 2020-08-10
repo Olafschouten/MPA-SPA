@@ -44,4 +44,12 @@ class Product extends Model
             ->where('id', $id)
             ->decrement('quantity', $qty);
     }
+
+    // Check if there are enough items left in de db
+    public static function checkQuantity($id)
+    {
+        return \DB::table('products')
+            ->where('id', $id)
+            ->get();
+    }
 }

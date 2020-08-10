@@ -11,8 +11,8 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="/categories">Category</a></li>
-                <li><a href="/products">Products</a></li>
+                <li><a href="{{ route('categories.show') }}">Category</a></li>
+                <li><a href="{{ route('products.show') }}">Products</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
