@@ -9,6 +9,31 @@
             <hr>
             <h2>My orders</h2>
 
+{{--            @foreach($orders as $order)--}}
+{{--                <p>{{ $order->created_at }}</p>--}}
+{{--            @endforeach--}}
+
+
+<!--            --><?php
+//            function cmp($a, $b)
+//            {
+//                if ($a == $b) {
+//                    return 0;
+//                }
+//                return ($a < $b) ? -1 : 1;
+//            }
+//
+//            $test = (array) $orders;
+//
+//            usort($test, "cmp");
+//
+//            foreach ($orders as $key => $value) {
+//                echo "$value->created_at";
+//                echo "<br>";
+//            }
+//            ?>
+
+
             @foreach($orders as $order)
                 <div class="panel panel-default">
                     <div class="panel-body">

@@ -122,12 +122,26 @@ class ProductController extends Controller
 
         $order = new Order();
         $order->cart = serialize($cart);
-        $order->address = $request->input('address');
         $order->name = $request->input('firstName');
+        $order->lastName = $request->input('lastName');
+        $order->email = $request->input('email');
+        $order->address = $request->input('address');
+        $order->zip = $request->input('zip');
 
         Auth::user()->orders()->save($order);
 
+        $this->updateQuantity($cart);
+
         Session::forget('cart');
         return redirect()->route('home.welcome')->with('success', 'Successfully purchased products!');
+    }
+
+    // Function to get te items out of the db to update the current quantity
+    public function updateQuantity($cart)
+    {
+        $stored_items = $cart->items;
+        foreach ($stored_items as $stored_item) {
+            Product::changeQuantity(array_values($stored_item)[2]['id'], $stored_item['qty']);
+        }
     }
 }

@@ -12,6 +12,7 @@
                 @foreach ($products as $product)
                     <h3>{{ $product->title }}</h3>
                     <div class="col-md-auto">{{ $product->description }}</div>
+                    <br>
                     <span>Items left: {{ $product->quantity }}</span>
                     <p>${{ $product->price }}</p>
                     <a href="{{ route('product.addToCart', ['id' => $product->id]) }}"

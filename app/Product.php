@@ -36,4 +36,12 @@ class Product extends Model
             ->where('category_product.product_id', $id)
             ->get();
     }
+
+    // Update quantity by product
+    public static function changeQuantity($id, $qty)
+    {
+        return \DB::table('products')
+            ->where('id', $id)
+            ->decrement('quantity', $qty);
+    }
 }

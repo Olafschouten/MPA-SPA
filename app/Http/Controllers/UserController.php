@@ -81,6 +81,7 @@ class UserController extends Controller
             $order->cart = unserialize($order->cart);
             return $order;
         });
+
         return view('user.profile', ['orders' => $orders]);
     }
 
