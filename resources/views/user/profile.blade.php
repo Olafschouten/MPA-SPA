@@ -14,24 +14,22 @@
 {{--            @endforeach--}}
 
 
-<!--            --><?php
-//            function cmp($a, $b)
-//            {
-//                if ($a == $b) {
-//                    return 0;
-//                }
-//                return ($a < $b) ? -1 : 1;
-//            }
-//
-//            $test = (array) $orders;
-//
-//            usort($test, "cmp");
-//
-//            foreach ($orders as $key => $value) {
-//                echo "$value->created_at";
-//                echo "<br>";
-//            }
-//            ?>
+{{--//            function cmp($a, $b)--}}
+{{--//            {--}}
+{{--//                if ($a == $b) {--}}
+{{--//                    return 0;--}}
+{{--//                }--}}
+{{--//                return ($a < $b) ? -1 : 1;--}}
+{{--//            }--}}
+{{--//--}}
+{{--//            $test = (array) $orders;--}}
+{{--//--}}
+{{--//            usort($test, "cmp");--}}
+{{--//--}}
+{{--//            foreach ($orders as $key => $value) {--}}
+{{--//                echo "$value->created_at";--}}
+{{--//                echo "<br>";--}}
+{{--//            }--}}
 
 
             @foreach($orders as $order)

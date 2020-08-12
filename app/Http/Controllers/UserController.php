@@ -68,12 +68,22 @@ class UserController extends Controller
                 Session::forget('oldUrl');
                 return redirect()->to($oldUrl);
             }
-            return redirect()->route('user.profile');
+            if (Auth::user()->orders) {
+                $orders = Auth::user()->orders;
+                $orders->transform(function ($order, $key) {
+                    $order->cart = unserialize($order->cart);
+                    return $order;
+                });
+
+                return view('user.profile', ['orders' => $orders]);
+            } else {
+                return view('home.welcome');
+            }
         }
         return redirect()->back();
     }
 
-    // Returns view to profile page
+    // Returns view to profile page --------
     public function getProfile()
     {
         $orders = Auth::user()->orders;
