@@ -37,12 +37,20 @@ class Product extends Model
             ->get();
     }
 
-    // Update quantity by product
-    public static function changeQuantity($id, $qty)
+    // Decrement quantity by product
+    public static function decrementQuantity($id, $qty)
     {
         return \DB::table('products')
             ->where('id', $id)
             ->decrement('quantity', $qty);
+    }
+
+    // Increment quantity by product
+    public static function incrementQuantity($id, $qty)
+    {
+        return \DB::table('products')
+            ->where('id', $id)
+            ->increment('quantity', $qty);
     }
 
     // Check if there are enough items left in de db
