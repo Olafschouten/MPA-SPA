@@ -15,8 +15,13 @@
                     <br>
                     <span>Items left: {{ $product->quantity }}</span>
                     <p>${{ $product->price }}</p>
+                    @if ($product->quantity >= 1)
+                        <a href="{{ route('product.addToCart', ['id' => $product->id]) }}"
+                           class="btn btn-primary pull-left" role="button">Add to cart</a>
+                    @elseif ($product->quantity <= 0)
                     <a href="{{ route('product.addToCart', ['id' => $product->id]) }}"
-                       class="btn btn-primary pull-left" role="button">Add to cart</a>
+                       class="btn btn-primary pull-left" role="button">Send request</a>
+                    @endif
                     <br>
                     <br>
                     @foreach($categories as $category)

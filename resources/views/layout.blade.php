@@ -87,6 +87,10 @@
         .b-m-15 {
             margin-bottom: 15px;
         }
+
+        .dropdown-menu.show {
+            display: block;
+        }
     </style>
 </head>
 <body>

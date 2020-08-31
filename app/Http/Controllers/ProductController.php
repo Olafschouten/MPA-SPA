@@ -35,12 +35,18 @@ class ProductController extends Controller
     public function getAddToCart(Request $request, $id)
     {
         $product = Product::find($id);
-        $cart = new Cart();
-        $cart->add($product, $product->id);
 
-        $request->session()->put('cart', $cart);
+        // Check if product is in stock.
+        if ($product->quantity >= 1) {
+            $cart = new Cart();
+            $cart->add($product, $product->id);
 
-        return redirect()->back();
+            $request->session()->put('cart', $cart);
+
+            return redirect()->back();
+        } else {
+            return redirect()->back()->with('out_of_stock', 'No more items in stock of this product.');
+        }
     }
 
     // Remove one item from the cart in the session
@@ -85,6 +91,10 @@ class ProductController extends Controller
         if ($item[0]->quantity - 1 >= array_values($cart->items)[0]['qty']) {
             // Finds item
             $product = Product::find($id);
+
+            // Changes the value of the item in the database.
+            Product::changeQuantity($id, 1);
+
             // Add item with item id to the existing cart
             $cart->add($product, $product->id);
 
@@ -128,6 +138,11 @@ class ProductController extends Controller
         if (!Session::has('cart')) {
             return redirect()->route('shop.shoppingCart');
         }
+
+        if ($request->input('firstName') == null) {
+            echo 'request if';
+            return redirect()->back();
+        } else {
         $cart = new Cart();
 
         $order = new Order();
@@ -144,6 +159,9 @@ class ProductController extends Controller
 
         Session::forget('cart');
         return redirect()->route('home.welcome')->with('success', 'Successfully purchased products!');
+
+        }
+
     }
 
     // Function to get te items out of the db to update the current quantity
@@ -153,5 +171,13 @@ class ProductController extends Controller
         foreach ($stored_items as $stored_item) {
             Product::changeQuantity(array_values($stored_item)[2]['id'], $stored_item['qty']);
         }
+    }
+
+    // Cancels the checkout and returns the value of items back to the database
+    public function cancelCheckout() {
+        // Gets data from the logged in user and takes all the items in the session.
+        print_r(Session::all());
+        die();
+        // Return to products view with a messages.
     }
 }
