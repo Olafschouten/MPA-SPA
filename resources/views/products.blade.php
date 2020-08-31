@@ -21,6 +21,8 @@
                                 <p class="text-danger">Bijna op!</p>
                             @elseif ($product->quantity >= 6)
                                 <p class="text-success">Op voorraad!</p>
+                            @elseif ($product->quantity >= 0)
+                                <p class="text-success">Voorraad op!</p>
                             @endif
                         </div>
                         <hr>
