@@ -40,7 +40,7 @@
                             <a href="{{ route('product.addToCart', ['id' => $product->id]) }}"
                                class="btn btn-primary pull-left" role="button">Add to cart</a>
                         @elseif ($product->quantity <= 0)
-                            <a href=""
+                            <a href="{{ route('email.show') }}"
                                class="btn btn-primary pull-left" role="button">Send request</a>
                         @endif
                         <a href="{{ route('product.show', ['id' => $product->id]) }}"

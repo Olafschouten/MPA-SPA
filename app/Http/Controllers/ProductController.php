@@ -20,17 +20,17 @@ class ProductController extends Controller
         ]);
     }
 
-    // Get product with categories
-    // Returns to Product page
+    // Get product with categories.
+    // Returns to Product page.
     public function showProducts($id)
     {
         return view('showProduct', [
-            'products' => Product::getProduct($id),
+            'product' => Product::getProduct($id),
             'categories' => Category::getSpecificCategories($id),
         ]);
     }
 
-    // Add item to the cart in the session or if not exist, make it
+    // Add item to the cart in the session or if not exist, make it.
     public function getAddToCart(Request $request, $id)
     {
         $product = Product::find($id);
@@ -51,7 +51,7 @@ class ProductController extends Controller
         }
     }
 
-    // Remove one item from the cart in the session
+    // Remove one item from the cart in the session.
     public function getReduceByOne($id)
     {
         Product::incrementQuantity($id, 1);
@@ -68,7 +68,7 @@ class ProductController extends Controller
         return redirect()->route('product.shoppingCart');
     }
 
-    // Remove all items from the cart in the session
+    // Remove all items from the cart in the session.
     public function getRemoveItem($id)
     {
         $cart = new Cart();
@@ -84,44 +84,44 @@ class ProductController extends Controller
         return redirect()->route('product.shoppingCart');
     }
 
-    // Increase item by one from the cart in the session
+    // Increase item by one from the cart in the session.
     public function getIncreaseByOne(Request $request, $id)
     {
         $product = Product::find($id);
 
-        // Make new Cart class from existing cart
+        // Make new Cart class from existing cart.
         $cart = new Cart();
 
-        // Checks if there are enough items left of that product
+        // Checks if there are enough items left of that product.
         if ($product->quantity >= 1) {
-            // Finds item
+            // Finds item.
             $product = Product::find($id);
 
             // Changes the value of the item in the database.
             Product::decrementQuantity($id, 1);
 
-            // Add item with item id to the existing cart
+            // Add item with item id to the existing cart.
             $cart->add($product, $product->id);
 
-            // If no cart exists make and or update existing cart in session
+            // If no cart exists make and or update existing cart in session.
             $request->session()->put('cart', $cart);
 
-            // Returns to page
+            // Returns to page.
             return redirect()->back();
         } else {
-            // Returns to page with a message
+            // Returns to page with a message.
             return redirect()->back()->with('Stock_empty', 'No more items in stock');
         }
     }
 
-    // Get data from the current cart in the session
+    // Get data from the current cart in the session.
     public function getCart()
     {
-        // If cart exists, return it to te view
+        // If cart exists, return it to te view.
         if (!Session::has('cart')) {
             return view('shop.shopping-cart', ['products' => null]);
         }
-        // Make class form existing cart
+        // Make class form existing cart.
         $cart = new Cart();
         return view('shop.shopping-cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
@@ -137,7 +137,7 @@ class ProductController extends Controller
         return view('shop.checkout', ['total' => $total]);
     }
 
-    // Return to view if al required input fields are filled, otherwise return to view (and try again)
+    // Return to view if al required input fields are filled, otherwise return to view (and try again).
     public function postCheckout(Request $request)
     {
         if (!Session::has('cart')) {

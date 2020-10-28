@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Collection;
 
 class UserController extends Controller
 {
-    // Returns view to register page
+    // Returns view to register page.
     public function getRegister()
     {
         return view('user.register');
     }
 
-    // Handles the registration to the database
-    // Then it will return you to the homepage
+    // Handles the registration to the database.
+    // Then it will return you to the homepage.
     public function postRegister(Request $request)
     {
         $this->validate($request, [
@@ -42,14 +44,14 @@ class UserController extends Controller
         return redirect()->route('home.welcome');
     }
 
-    // Returns view to login page
+    // Returns view to login page.
     public function getLogin()
     {
         return view('user.login');
     }
 
-    // Handles the registration to the database
-    // Then it will return you to the homepage
+    // Handles the registration to the database.
+    // Then it will return you to the homepage.
     public function postLogin(Request $request)
     {
         $this->validate($request, [
@@ -83,7 +85,7 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    // Returns view to profile page --------
+    // Returns view to profile page.
     public function getProfile()
     {
         $orders = Auth::user()->orders;
@@ -95,7 +97,7 @@ class UserController extends Controller
         return view('user.profile', ['orders' => $orders]);
     }
 
-    // Logs the user out
+    // Logs the user out.
     public function getLogout()
     {
         $user = Auth::guard()->user();

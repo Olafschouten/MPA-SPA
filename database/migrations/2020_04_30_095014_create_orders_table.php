@@ -20,6 +20,9 @@ class CreateOrdersTable extends Migration
             $table->text('cart');
             $table->text('address');
             $table->string('name');
+            $table->string('lastName');
+            $table->string('zip');
+            $table->string('email');
         });
     }
 

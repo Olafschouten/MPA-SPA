@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
-    // Show welcome page
+    // Show welcome page.
     public function getIndex()
     {
         return view('/welcome');

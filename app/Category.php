@@ -16,15 +16,12 @@ class Category extends Model
 
     public static function getCategories()
     {
-        return \DB::table('categories')
-            ->get();
+        return Category::all();
     }
 
     public static function getCategory($id)
     {
-        return \DB::table('categories')
-            ->where('id', $id)
-            ->get();
+        return Category::find($id);
     }
 
     public static function getSpecificCategories($id)

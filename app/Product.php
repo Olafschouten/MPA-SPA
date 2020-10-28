@@ -16,16 +16,12 @@ class Product extends Model
 
     public static function getProducts()
     {
-        return \DB::table('products')
-            ->get();
+        return Product::all();
     }
 
     public static function getProduct($id)
     {
-        return \DB::table('products AS p')
-            ->where('p.id', $id)
-            ->select('p.id', 'p.title', 'p.description', 'p.price', 'p.quantity')
-            ->get();
+        return Product::find($id);
     }
 
     public static function getSpecificProduct($id)
@@ -37,7 +33,7 @@ class Product extends Model
             ->get();
     }
 
-    // Decrement quantity by product
+    // Decrement quantity by product.
     public static function decrementQuantity($id, $qty)
     {
         return \DB::table('products')
@@ -45,7 +41,7 @@ class Product extends Model
             ->decrement('quantity', $qty);
     }
 
-    // Increment quantity by product
+    // Increment quantity by product.
     public static function incrementQuantity($id, $qty)
     {
         return \DB::table('products')
@@ -53,7 +49,7 @@ class Product extends Model
             ->increment('quantity', $qty);
     }
 
-    // Check if there are enough items left in de db
+    // Check if there are enough items left in de db.
     public static function checkQuantity($id)
     {
         return \DB::table('products')

@@ -10,9 +10,7 @@
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col col-lg-auto">
-                    @foreach ($category as $item)
-                        <h2>{{ $item->title }}</h2>
-                    @endforeach
+                    <h2>{{ $category->title }}</h2>
                 </div>
                 @foreach ($products as $product)
                     <div class="col-md-3">

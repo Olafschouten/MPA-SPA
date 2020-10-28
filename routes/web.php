@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,16 @@ Route::get('/remove/{id}', [
 Route::get('/shopping-cart', [
     'uses' => 'ProductController@getCart',
     'as' => 'product.shoppingCart'
+]);
+
+Route::get('/email', [
+    'uses' => 'EmailController@show',
+    'as' => 'email.show'
+]);
+
+Route::post('/email', [
+    'uses' => 'EmailController@sendEmail',
+    'as' => 'email.sendEmail'
 ]);
 
 Route::group(['middleware' => 'auth'], function () {
